@@ -39,9 +39,7 @@ class TuurnApp extends StatelessWidget {
         // Kalau layar sudah selebar HP, tampilkan apa adanya.
         if (mq.size.width <= 500) return child!;
 
-        // Di layar lebar (browser desktop): latar hitam,
-        // aplikasi dipasang di tengah dengan lebar HP (412px).
-        const phoneWidth = 412.0;
+        const phoneWidth = 344.0;
         return ColoredBox(
           color: Colors.black,
           child: Center(
