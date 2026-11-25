@@ -97,19 +97,22 @@ class ClaimService extends ChangeNotifier {
   int pointsOf(AppUser u) =>
       kWelcomePoints + _list(u).fold<int>(0, (sum, a) => sum + a.points);
 
-  /// Panggil ini saat scan QR berhasil.
-  void addClaim(
+  /// Panggil ini saat scan QR / kode manual berhasil.
+  /// Mengembalikan aktivitas yang baru dibuat (dipakai halaman Hasil Klaim).
+  ActivityItem addClaim(
     AppUser u, {
     required String outlet,
     DateTime? time,
     int plastic = 1,
   }) {
-    _list(u).add(ActivityItem.claim(
+    final item = ActivityItem.claim(
       outlet: outlet,
       time: time ?? DateTime.now(),
       plastic: plastic,
-    ));
+    );
+    _list(u).add(item);
     notifyListeners();
+    return item;
   }
 
   void addVoucher(AppUser u, {required String title, int cost = 0, DateTime? time}) {
@@ -250,6 +253,12 @@ String formatActivityTime(DateTime t) {
     return 'Hari ini, $hh:$mm';
   }
   return '${t.day} ${_monthShort[t.month - 1]}';
+}
+
+/// "9 Nov 2026, 9:12" (dipakai di halaman Hasil Klaim).
+String formatFullDateTime(DateTime t) {
+  final mm = t.minute.toString().padLeft(2, '0');
+  return '${t.day} ${_monthShort[t.month - 1]} ${t.year}, ${t.hour}:$mm';
 }
 
 /// 0.1 -> "0.1", 0.15 -> "0.15", 0 -> "0".

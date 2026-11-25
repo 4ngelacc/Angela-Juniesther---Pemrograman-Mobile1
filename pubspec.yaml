@@ -38,6 +38,9 @@ dependencies:
   # Font Inter (sesuai desain)
   google_fonts: ^6.2.1
 
+  mobile_scanner: ^7.0.0
+  permission_handler: ^12.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

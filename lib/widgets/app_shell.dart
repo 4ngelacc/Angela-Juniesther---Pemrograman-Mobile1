@@ -7,6 +7,7 @@ import '../services/auth_service.dart';
 import '../services/claim_service.dart';
 import 'design_frame.dart';
 import 'glow_background.dart';
+import '../pages/scan_page.dart';
 
 enum NavTab { home, merchant, scan, reward, profile }
 
@@ -42,12 +43,9 @@ class TuurnScaffold extends StatelessWidget {
         }
         break;
       case NavTab.scan:
-        // SEMENTARA: anggap scan QR berhasil. Ganti dengan halaman scan asli.
-        ClaimService.instance.simulateScan(user);
-        messenger
-          ..hideCurrentSnackBar()
-          ..showSnackBar(const SnackBar(
-              content: Text('Klaim berhasil! +$kPointsPerClaim poin')));
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => ScanPage(user: user)),
+        );
         break;
       default:
         final name = {

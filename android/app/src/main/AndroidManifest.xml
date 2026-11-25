@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Dibutuhkan google_fonts untuk mengunduh font Inter (build release) -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Dibutuhkan untuk scan QR memakai kamera -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <application
         android:label="Tuurn"
         android:name="${applicationName}"
